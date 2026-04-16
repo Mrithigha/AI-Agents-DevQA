@@ -1,0 +1,59 @@
+{
+  "appbuilder": {
+    "status": "complete",
+    "story_ids": [
+      "SCRUM-8"
+    ],
+    "prs": [
+      {
+        "repo": "gemstoneworld",
+        "pr_url": "https://github.com/Mrithigha/gemstoneworld/pull/2",
+        "branch": "feat/AI-Dev-SCRUM-8"
+      },
+      {
+        "repo": "gemstoneworld",
+        "pr_url": "https://github.com/Mrithigha/gemstoneworld/pull/3",
+        "branch": "feat/AI-Dev-SCRUM-8-fix"
+      }
+    ]
+  },
+  "functionaltestdesigner": {
+    "status": "complete",
+    "stories_processed": ["SCRUM-8"],
+    "qa_repo_path": "C:\\Users\\karth\\OneDrive\\Desktop\\Tasks\\Tasks\\QAGemstoneWorld-UIAutomation",
+    "tc_prs": [
+      {
+        "story": "SCRUM-8",
+        "pr_url": "https://github.com/Mrithigha/QAGemstoneWorld-UIAutomation/pull/2",
+        "tc_count": 21
+      }
+    ]
+  },
+  "apitestdesigner": {
+    "status": "complete",
+    "stories_processed": ["SCRUM-8"],
+    "qa_repo_path": "C:\\Users\\karth\\OneDrive\\Desktop\\Tasks\\Tasks\\QAGemstoneWorld-UIAutomation",
+    "tc_prs": [
+      {
+        "story": "SCRUM-8",
+        "pr_url": "https://github.com/Mrithigha/QAGemstoneWorld-UIAutomation/pull/1",
+        "tc_count": 24
+      }
+    ]
+  },
+  "functionalscriptgen": {
+    "status": "complete",
+    "stories_processed": ["SCRUM-8"],
+    "qa_repo_path": "C:\\Users\\karth\\OneDrive\\Desktop\\Tasks\\Tasks\\QAGemstoneWorld-UIAutomation",
+    "script_prs": [
+      {
+        "story": "SCRUM-8",
+        "pr_url": "https://github.com/Mrithigha/QAGemstoneWorld-UIAutomation/pull/3",
+        "branch": "feat/AI-FSG-SCRUM-8",
+        "automated_tc_count": 18,
+        "manual_tc_count": 2,
+        "total_tc_count": 20
+      }
+    ]
+  }
+}

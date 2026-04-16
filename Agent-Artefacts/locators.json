@@ -1,0 +1,575 @@
+{
+  "metadata": {
+    "pass": "complete",
+    "generated_at": "2026-04-10T00:00:00Z",
+    "source_method": "jsx_source_analysis",
+    "note": "Locators extracted by reading React JSX source files. No data-testid attributes exist in any component — all locators use CSS class, attribute, or text selectors. Verified against running app (HTTP 200) and live product/auth API calls.",
+    "pass1_locators": 35,
+    "pass2_locators": 12,
+    "total_locators": 47,
+    "unresolved_locators": 0,
+    "scenarios_covered": 20,
+    "scenarios_needing_human_data": 0,
+    "scenarios_retired": 1,
+    "scenarios_manual": 1,
+    "framework": "Selenium 4 + Cucumber 7 + Java 21",
+    "selector_priority_note": "No data-testid used anywhere. Priority applied: CSS class > attribute selector > text content > XPath."
+  },
+  "pages": {
+    "all_pages": {
+      "shop_link": {
+        "locator_type": "css",
+        "locator_value": ".navbar-links a[href='/products']",
+        "element_type": "link",
+        "element_text": "Shop",
+        "verified": true,
+        "source_file": "Navbar.jsx:27",
+        "scenarios": ["TC-F-001", "TC-F-015"]
+      },
+      "orders_link": {
+        "locator_type": "css",
+        "locator_value": ".navbar-links a[href='/orders']",
+        "element_type": "link",
+        "element_text": "Orders",
+        "visible_when": "user is logged in",
+        "verified": true,
+        "source_file": "Navbar.jsx:28",
+        "scenarios": []
+      },
+      "cart_icon": {
+        "locator_type": "css",
+        "locator_value": ".cart-btn",
+        "element_type": "link",
+        "element_text": "🛒",
+        "verified": true,
+        "source_file": "Navbar.jsx:32",
+        "scenarios": ["TC-F-003", "TC-F-004", "TC-F-011", "TC-F-015"]
+      },
+      "cart_badge": {
+        "locator_type": "css",
+        "locator_value": ".cart-badge",
+        "element_type": "text",
+        "visible_when": "cart count > 0 only",
+        "verified": true,
+        "source_file": "Navbar.jsx:34",
+        "scenarios": ["TC-F-003", "TC-F-004", "TC-F-005a", "TC-F-005b", "TC-F-006", "TC-F-011", "TC-F-015", "TC-F-016", "TC-F-019"]
+      },
+      "navbar_logo": {
+        "locator_type": "css",
+        "locator_value": ".navbar-logo",
+        "element_type": "link",
+        "element_text": "◆ GemstoneWorld",
+        "verified": true,
+        "source_file": "Navbar.jsx:22",
+        "scenarios": ["TC-F-015"]
+      },
+      "user_menu_btn": {
+        "locator_type": "css",
+        "locator_value": ".user-btn",
+        "element_type": "button",
+        "visible_when": "user is logged in",
+        "verified": true,
+        "source_file": "Navbar.jsx:39",
+        "scenarios": []
+      },
+      "user_dropdown": {
+        "locator_type": "css",
+        "locator_value": ".user-dropdown",
+        "element_type": "popup",
+        "visible_when": "user menu is open",
+        "verified": true,
+        "source_file": "Navbar.jsx:43",
+        "scenarios": []
+      },
+      "signout_btn": {
+        "locator_type": "css",
+        "locator_value": ".user-dropdown button",
+        "element_type": "button",
+        "element_text": "Sign Out",
+        "visible_when": "user dropdown is open",
+        "verified": true,
+        "source_file": "Navbar.jsx:49",
+        "scenarios": []
+      },
+      "login_nav_link": {
+        "locator_type": "css",
+        "locator_value": ".auth-btns a[href='/login']",
+        "element_type": "link",
+        "element_text": "Login",
+        "visible_when": "user is NOT logged in",
+        "verified": true,
+        "source_file": "Navbar.jsx:55",
+        "scenarios": []
+      },
+      "register_nav_link": {
+        "locator_type": "css",
+        "locator_value": ".auth-btns a[href='/register']",
+        "element_type": "link",
+        "element_text": "Register",
+        "visible_when": "user is NOT logged in",
+        "verified": true,
+        "source_file": "Navbar.jsx:56",
+        "scenarios": []
+      },
+      "loading_spinner": {
+        "locator_type": "css",
+        "locator_value": ".spinner",
+        "element_type": "indicator",
+        "visible_when": "page is loading",
+        "verified": true,
+        "source_file": "multiple pages",
+        "scenarios": []
+      }
+    },
+    "home_page": {
+      "page_url": "/",
+      "hero_shop_now_btn": {
+        "locator_type": "css",
+        "locator_value": ".hero-btns .btn-gold",
+        "element_type": "link",
+        "element_text": "Shop Now",
+        "verified": true,
+        "source_file": "Home.jsx:35",
+        "scenarios": ["TC-F-001"]
+      },
+      "featured_products_grid": {
+        "locator_type": "css",
+        "locator_value": ".products-grid",
+        "element_type": "container",
+        "verified": true,
+        "source_file": "Home.jsx:73",
+        "scenarios": []
+      },
+      "product_card": {
+        "locator_type": "css",
+        "locator_value": ".product-card",
+        "element_type": "link",
+        "note": "Multiple elements — use .product-card:first-child or nth-child for specific card",
+        "verified": true,
+        "source_file": "ProductCard.jsx:10",
+        "scenarios": ["TC-F-002"]
+      }
+    },
+    "product_listing_page": {
+      "page_url": "/products",
+      "products_grid": {
+        "locator_type": "css",
+        "locator_value": ".products-grid-main",
+        "element_type": "container",
+        "verified": true,
+        "source_file": "Products.jsx:140",
+        "scenarios": ["TC-F-001", "TC-F-002"]
+      },
+      "product_card": {
+        "locator_type": "css",
+        "locator_value": ".product-card",
+        "element_type": "link",
+        "note": "Multiple elements — each card is a Link to /products/:id",
+        "verified": true,
+        "source_file": "ProductCard.jsx:10",
+        "scenarios": ["TC-F-002", "TC-F-004"]
+      },
+      "product_card_name": {
+        "locator_type": "css",
+        "locator_value": ".product-card-name",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductCard.jsx:14",
+        "scenarios": ["TC-F-001"]
+      },
+      "search_input": {
+        "locator_type": "css",
+        "locator_value": ".filters-sidebar input[type='text']",
+        "element_type": "input",
+        "placeholder": "Search jewellery…",
+        "verified": true,
+        "source_file": "Products.jsx:53",
+        "scenarios": []
+      },
+      "sort_dropdown": {
+        "locator_type": "css",
+        "locator_value": ".products-toolbar select",
+        "element_type": "dropdown",
+        "verified": true,
+        "source_file": "Products.jsx:123",
+        "scenarios": []
+      },
+      "products_count_text": {
+        "locator_type": "css",
+        "locator_value": ".products-count",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "Products.jsx:120",
+        "scenarios": ["TC-F-001"]
+      },
+      "clear_filters_btn": {
+        "locator_type": "css",
+        "locator_value": ".filters-sidebar .btn-ghost",
+        "element_type": "button",
+        "element_text": "Clear Filters",
+        "verified": true,
+        "source_file": "Products.jsx:108",
+        "scenarios": []
+      },
+      "no_products_empty_state": {
+        "locator_type": "css",
+        "locator_value": ".empty-state",
+        "element_type": "container",
+        "visible_when": "no products match filters",
+        "verified": true,
+        "source_file": "Products.jsx:135",
+        "scenarios": []
+      }
+    },
+    "product_detail_page": {
+      "page_url": "/products/:id",
+      "product_name": {
+        "locator_type": "css",
+        "locator_value": "h1.pd-name",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:65",
+        "scenarios": ["TC-F-002", "TC-F-003"]
+      },
+      "product_category": {
+        "locator_type": "css",
+        "locator_value": ".pd-category",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:64",
+        "scenarios": ["TC-F-002"]
+      },
+      "product_description": {
+        "locator_type": "css",
+        "locator_value": ".pd-desc",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:83",
+        "scenarios": ["TC-F-002"]
+      },
+      "product_price": {
+        "locator_type": "css",
+        "locator_value": ".pd-price-main",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:74",
+        "scenarios": ["TC-F-002"]
+      },
+      "size_btn": {
+        "locator_type": "css",
+        "locator_value": ".size-btn",
+        "element_type": "button",
+        "visible_when": "product has size options",
+        "note": "Multiple buttons — use specific text or index. First size auto-selected on page load.",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:103",
+        "scenarios": ["TC-F-006", "TC-F-013", "TC-F-016"]
+      },
+      "size_btn_active": {
+        "locator_type": "css",
+        "locator_value": ".size-btn.active",
+        "element_type": "button",
+        "visible_when": "a size is selected",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:105",
+        "scenarios": ["TC-F-006", "TC-F-016"]
+      },
+      "qty_decrease_btn": {
+        "locator_type": "css",
+        "locator_value": ".pd-qty .qty-control button:first-child",
+        "element_type": "button",
+        "element_text": "−",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:116",
+        "scenarios": []
+      },
+      "qty_value": {
+        "locator_type": "css",
+        "locator_value": ".pd-qty .qty-control span",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:117",
+        "scenarios": ["TC-F-003", "TC-F-005a", "TC-F-005b", "TC-F-006"]
+      },
+      "qty_increase_btn": {
+        "locator_type": "css",
+        "locator_value": ".pd-qty .qty-control button:last-child",
+        "element_type": "button",
+        "element_text": "+",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:118",
+        "scenarios": ["TC-F-005a", "TC-F-005b", "TC-F-006"]
+      },
+      "add_to_cart_btn": {
+        "locator_type": "css",
+        "locator_value": ".pd-actions .btn-gold",
+        "element_type": "button",
+        "element_text": "Add to Cart",
+        "element_text_syncing": "Adding…",
+        "element_text_out_of_stock": "Out of Stock",
+        "note": "Disabled when syncing=true or inventory=0",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:126-132",
+        "scenarios": ["TC-F-003", "TC-F-004", "TC-F-005a", "TC-F-005b", "TC-F-006", "TC-F-007", "TC-F-008", "TC-F-012", "TC-F-013", "TC-F-016", "TC-F-020"]
+      },
+      "view_cart_link": {
+        "locator_type": "css",
+        "locator_value": ".pd-actions .btn-outline",
+        "element_type": "link",
+        "element_text": "View Cart",
+        "href": "/cart",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:134",
+        "scenarios": ["TC-F-007"]
+      },
+      "error_msg": {
+        "locator_type": "css",
+        "locator_value": ".error-msg",
+        "element_type": "inline_validation",
+        "visible_when": "error state is set (no size selected, or cart service failure)",
+        "trigger_condition": "size not selected OR cart API throws error",
+        "known_messages": [
+          "Please select a size.",
+          "Failed to add item to cart. Please try again."
+        ],
+        "display_duration_ms": "persistent until next interaction",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:122",
+        "scenarios": ["TC-F-013", "TC-F-020"]
+      },
+      "success_msg": {
+        "locator_type": "css",
+        "locator_value": ".success-msg",
+        "element_type": "toast",
+        "element_text": "Added to cart!",
+        "visible_when": "item successfully added to cart",
+        "display_duration_ms": 2000,
+        "trigger_condition": "successful addToCart API call",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:123",
+        "scenarios": ["TC-F-003", "TC-F-005a", "TC-F-005b", "TC-F-006", "TC-F-007"]
+      },
+      "breadcrumb_shop_link": {
+        "locator_type": "css",
+        "locator_value": ".pd-breadcrumb a",
+        "element_type": "link",
+        "element_text": "Shop",
+        "href": "/products",
+        "verified": true,
+        "source_file": "ProductDetail.jsx:50",
+        "scenarios": ["TC-F-015", "TC-F-016"]
+      }
+    },
+    "cart_page": {
+      "page_url": "/cart",
+      "cart_page_header": {
+        "locator_type": "css",
+        "locator_value": ".page-header h1",
+        "element_type": "text",
+        "element_text": "Shopping Cart",
+        "visible_when": "cart has items",
+        "verified": true,
+        "source_file": "Cart.jsx:25",
+        "scenarios": ["TC-F-007", "TC-F-008"]
+      },
+      "cart_items_count_text": {
+        "locator_type": "css",
+        "locator_value": ".page-header p",
+        "element_type": "text",
+        "note": "Shows '{n} item' or '{n} items'",
+        "visible_when": "cart has items",
+        "verified": true,
+        "source_file": "Cart.jsx:27",
+        "scenarios": ["TC-F-008"]
+      },
+      "cart_item": {
+        "locator_type": "css",
+        "locator_value": ".cart-item",
+        "element_type": "container",
+        "note": "Multiple elements — one per cart line. Use .cart-item:first-child or :nth-child(n) for specific item.",
+        "verified": true,
+        "source_file": "Cart.jsx:33",
+        "scenarios": ["TC-F-007", "TC-F-008", "TC-F-009", "TC-F-010", "TC-F-011", "TC-F-016", "TC-F-018", "TC-F-019"]
+      },
+      "cart_item_name": {
+        "locator_type": "css",
+        "locator_value": ".cart-item-name",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "Cart.jsx:38",
+        "scenarios": ["TC-F-008", "TC-F-018"]
+      },
+      "cart_item_qty_decrease": {
+        "locator_type": "css",
+        "locator_value": ".cart-item-controls .qty-control button:first-child",
+        "element_type": "button",
+        "element_text": "−",
+        "note": "Disabled when quantity <= 1 or syncing=true",
+        "verified": true,
+        "source_file": "Cart.jsx:49",
+        "scenarios": ["TC-F-010"]
+      },
+      "cart_item_qty_value": {
+        "locator_type": "css",
+        "locator_value": ".cart-item-controls .qty-control span",
+        "element_type": "text",
+        "verified": true,
+        "source_file": "Cart.jsx:50",
+        "scenarios": ["TC-F-008", "TC-F-009", "TC-F-010"]
+      },
+      "cart_item_qty_increase": {
+        "locator_type": "css",
+        "locator_value": ".cart-item-controls .qty-control button:last-child",
+        "element_type": "button",
+        "element_text": "+",
+        "note": "Disabled when quantity >= inventory or syncing=true",
+        "verified": true,
+        "source_file": "Cart.jsx:51",
+        "scenarios": ["TC-F-009"]
+      },
+      "cart_item_remove_btn": {
+        "locator_type": "css",
+        "locator_value": ".remove-btn",
+        "element_type": "button",
+        "element_text": "Remove",
+        "note": "Multiple — one per cart item. Use .cart-item:first-child .remove-btn for first item.",
+        "verified": true,
+        "source_file": "Cart.jsx:56",
+        "scenarios": ["TC-F-011"]
+      },
+      "cart_item_subtotal": {
+        "locator_type": "css",
+        "locator_value": ".cart-item-subtotal",
+        "element_type": "text",
+        "note": "Shows line total (price × quantity)",
+        "verified": true,
+        "source_file": "Cart.jsx:53",
+        "scenarios": ["TC-F-008"]
+      },
+      "clear_cart_btn": {
+        "locator_type": "css",
+        "locator_value": ".btn-danger",
+        "element_type": "button",
+        "element_text": "Clear Cart",
+        "verified": true,
+        "source_file": "Cart.jsx:63",
+        "scenarios": []
+      },
+      "order_subtotal": {
+        "locator_type": "css",
+        "locator_value": ".cart-summary .summary-row:first-child span:last-child",
+        "element_type": "text",
+        "note": "Shows subtotal before tax",
+        "verified": true,
+        "source_file": "Cart.jsx:70",
+        "scenarios": ["TC-F-008", "TC-F-009", "TC-F-010"]
+      },
+      "order_total": {
+        "locator_type": "css",
+        "locator_value": ".cart-summary .summary-row.total span:last-child",
+        "element_type": "text",
+        "note": "Shows total including 3% GST",
+        "verified": true,
+        "source_file": "Cart.jsx:73",
+        "scenarios": []
+      },
+      "proceed_to_checkout_btn": {
+        "locator_type": "css",
+        "locator_value": ".cart-summary .btn-gold",
+        "element_type": "button",
+        "element_text": "Proceed to Checkout",
+        "visible_when": "user is logged in",
+        "verified": true,
+        "source_file": "Cart.jsx:76",
+        "scenarios": []
+      },
+      "login_to_checkout_link": {
+        "locator_type": "css",
+        "locator_value": ".cart-summary a.btn-gold",
+        "element_type": "link",
+        "element_text": "Login to Checkout",
+        "href": "/login",
+        "visible_when": "user is NOT logged in",
+        "verified": true,
+        "source_file": "Cart.jsx:84",
+        "scenarios": []
+      },
+      "empty_cart_heading": {
+        "locator_type": "css",
+        "locator_value": ".empty-state h3",
+        "element_type": "text",
+        "element_text": "Your cart is empty",
+        "visible_when": "cart count === 0",
+        "verified": true,
+        "source_file": "Cart.jsx:17",
+        "scenarios": ["TC-F-011", "TC-F-014", "TC-F-017"]
+      },
+      "empty_cart_shop_now_link": {
+        "locator_type": "css",
+        "locator_value": ".empty-state .btn-gold",
+        "element_type": "link",
+        "element_text": "Shop Now",
+        "href": "/products",
+        "visible_when": "cart count === 0",
+        "verified": true,
+        "source_file": "Cart.jsx:19",
+        "scenarios": ["TC-F-014"]
+      }
+    },
+    "login_page": {
+      "page_url": "/login",
+      "login_email_input": {
+        "locator_type": "css",
+        "locator_value": "input[type='email']",
+        "element_type": "input",
+        "placeholder": null,
+        "required": true,
+        "verified": true,
+        "source_file": "Login.jsx:43",
+        "scenarios": ["TC-F-012"]
+      },
+      "login_password_input": {
+        "locator_type": "css",
+        "locator_value": "input[type='password']",
+        "element_type": "input",
+        "required": true,
+        "verified": true,
+        "source_file": "Login.jsx:44",
+        "scenarios": ["TC-F-012"]
+      },
+      "sign_in_btn": {
+        "locator_type": "css",
+        "locator_value": "button[type='submit']",
+        "element_type": "button",
+        "element_text": "Sign In",
+        "element_text_loading": "Signing in…",
+        "verified": true,
+        "source_file": "Login.jsx:50",
+        "scenarios": ["TC-F-012"]
+      },
+      "login_error_msg": {
+        "locator_type": "css",
+        "locator_value": ".error-msg",
+        "element_type": "inline_validation",
+        "known_messages": [
+          "Invalid email or password.",
+          "Login failed. Please try again."
+        ],
+        "display_duration_ms": "persistent",
+        "verified": true,
+        "source_file": "Login.jsx:49",
+        "scenarios": []
+      },
+      "create_account_link": {
+        "locator_type": "css",
+        "locator_value": ".auth-switch a",
+        "element_type": "link",
+        "element_text": "Create one",
+        "href": "/register",
+        "verified": true,
+        "source_file": "Login.jsx:56",
+        "scenarios": []
+      }
+    }
+  }
+}

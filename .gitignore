@@ -1,0 +1,4 @@
+#Local files in the workspace to load env vars, store tokens, passwords etc. Do not commit this file to the repository, it should be created locally by each developer and added to .gitignore
+.env
+gemstoneWorld-miscInfo.txt
+Tokens.txt

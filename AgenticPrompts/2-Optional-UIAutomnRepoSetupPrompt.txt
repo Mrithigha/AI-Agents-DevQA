@@ -1,0 +1,73 @@
+You are a repo setup assistant. I have just pushed a UI automation bootstrap
+template to https://github.com/Mrithigha/QAGemstoneWorld-UIAutomation
+
+The repo is cloned locally at ./QAGemstoneWorld-UIAutomation
+
+Please clean it up by doing the following:
+
+1. Delete all existing feature files (any .feature files in the repo) EXCEPT
+   keep google.feature as a sample reference for the expected feature file style
+
+2. Delete all step definition files related to HRMS. Keep any step defs
+   related to google.feature intact since we are keeping that as a reference.
+   Keep all base classes and structure.
+
+3. Clear the content in any test data files, sample CSV or JSON files related
+   to HRMS or demo domains. In each cleared JSON file, add one example entry
+   showing the expected format for storing a user object like:
+   {
+     "users": [
+       {
+         "username": "testuser@example.com",
+         "password": "Test@1234",
+         "role": "customer"
+       }
+     ]
+   }
+
+4. Keep all utility classes, base classes, hooks, configuration files,
+   page object base classes, and the Maven/pom.xml structure intact
+
+5. Keep the folder structure exactly as is — just remove irrelevant content files
+
+6. Rename the package com.hr.ui to com.org.ui everywhere it appears across
+   all Java files, folder paths and any configuration that references it.
+   Refactor all imports and references accordingly. Verify no broken imports remain.
+
+7. Create these empty placeholder folders with a .gitkeep file in each:
+   - src/test/resources/AI-TC-Design/API
+   - src/test/resources/AI-TC-Design/Functional
+   - src/test/resources/features (can have the google.feature as a sample)
+   - src/test/java/com/hr/ui/steps (can have GoogleSteps.java as a sample)
+   - src/test/java/com/org/ui/pages (retain the Base page )
+
+8. Create a README.md at the root of the repo with the following content:
+   # GemstoneWorld UI Automation
+
+   ## Tech stack
+   Selenium, Java, Cucumber, BDD, JUnit, Maven
+
+   ## Folder structure
+   - src/test/resources/AI-TC-Design/API — API test cases (auto-generated)
+   - src/test/resources/AI-TC-Design/Functional — Functional BDD test cases (auto-generated)
+   - src/test/resources/features — Feature files for automation
+   - src/test/java/com/org/ui/stepdefs — Step definitions
+   - src/test/java/com/org/ui/pages — Page Object Model classes
+
+   ## TC categorisation convention
+   AI-TC-Design >> API >> {EpicNumber} >> {StoryNumber}
+   AI-TC-Design >> Functional >> {EpicNumber} >> {StoryNumber}
+
+   ## Running tests
+   mvn test
+
+9. Commit all changes with message:
+   "chore: clean up bootstrap template for GemstoneWorld QA"
+
+10. Push to origin master
+
+Do not delete or modify any of the following:
+- pom.xml
+- Any base class or utility class
+- Any hooks or configuration files
+- The existing folder structure skeleton

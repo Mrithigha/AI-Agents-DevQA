@@ -1,0 +1,620 @@
+{
+  "metadata": {
+    "last_updated": "2026-04-10T00:00:00Z",
+    "total_iterations": 1,
+    "app_base_url": "http://localhost:5173",
+    "auth_service_url": "http://localhost:3001",
+    "products_service_url": "http://localhost:3002",
+    "pass1_scenarios": 12,
+    "pass2_scenarios": 8
+  },
+  "credentials": {
+    "valid_customers": [
+      {
+        "email": "validuser@test.com",
+        "password": "Test@12345",
+        "name": "TestUserValid",
+        "id": "a279d382-11e7-487e-a3d3-257e47a686fc",
+        "role": "customer",
+        "source": "env",
+        "verified": true
+      },
+      {
+        "email": "validuser1@test.com",
+        "password": "Test@12345",
+        "name": "testvaliduser",
+        "id": "d20227a6-3bc8-4891-9294-8262233db36b",
+        "role": "customer",
+        "source": "env",
+        "verified": true
+      }
+    ],
+    "valid_admins": [],
+    "invalid_credentials": [
+      {
+        "email": "nonexistent@test.com",
+        "password": "Test@12345",
+        "expected_error": "Invalid email or password.",
+        "source": "synthesised"
+      },
+      {
+        "email": "validuser@test.com",
+        "password": "WrongPass99",
+        "expected_error": "Invalid email or password.",
+        "source": "synthesised"
+      }
+    ]
+  },
+  "email_addresses": {
+    "valid": [
+      "validuser@test.com",
+      "validuser1@test.com"
+    ],
+    "invalid_format": [],
+    "unregistered": [
+      "nonexistent@test.com"
+    ],
+    "already_registered": [
+      "validuser@test.com"
+    ]
+  },
+  "product_data": {
+    "products_without_size": [
+      {
+        "id": 36,
+        "name": "Adjustable Floral Ring",
+        "sizes": ["Free Size"],
+        "inventory": 10,
+        "price": null,
+        "url": "/products/36",
+        "note": "Free Size only — no size selection required"
+      },
+      {
+        "id": 38,
+        "name": "Gold-Tone Choker Chain",
+        "sizes": ["Free Size"],
+        "inventory": 10,
+        "url": "/products/38"
+      },
+      {
+        "id": 39,
+        "name": "Peacock Feather Earrings",
+        "sizes": ["Free Size"],
+        "inventory": 10,
+        "url": "/products/39"
+      }
+    ],
+    "products_with_size": [
+      {
+        "id": 4,
+        "name": "Gold Solitaire Ring",
+        "sizes": ["6", "7", "8", "9", "10"],
+        "inventory": 8,
+        "url": "/products/4",
+        "default_test_size": "7"
+      },
+      {
+        "id": 20,
+        "name": "Silver Turquoise Ring",
+        "sizes": ["6", "7", "8", "9"],
+        "inventory": 6,
+        "url": "/products/20",
+        "default_test_size": "7"
+      },
+      {
+        "id": 11,
+        "name": "Heritage Gold Ring",
+        "sizes": ["6", "7", "8", "9"],
+        "inventory": 3,
+        "url": "/products/11",
+        "default_test_size": "7"
+      }
+    ],
+    "valid_product_ids": [36, 38, 39, 4, 20, 11],
+    "out_of_stock_ids": [],
+    "invalid_product_ids": [99999]
+  },
+  "cart_data": {
+    "valid_quantities": [1, 2, 3, 5],
+    "invalid_quantities": [],
+    "max_quantity": "capped_by_inventory",
+    "note": "CartService.java uses Math.min(qty, inventory). ProductDetail.jsx qty control also uses Math.min(product.inventory, q+1). No absolute max — bounded per product."
+  },
+  "order_data": {
+    "valid_order_ids": [],
+    "invalid_order_ids": []
+  },
+  "payment_data": {
+    "note": "App uses Cash on Delivery only. No card payment implemented. No payment data needed."
+  },
+  "general": {
+    "valid_strings": ["Test address line 1"],
+    "empty_string": "",
+    "very_long_string": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "special_characters": "!@#$%^&*()",
+    "sql_injection_attempt": "' OR '1'='1",
+    "xss_attempt": "<script>alert('xss')</script>"
+  },
+  "backend_validation_rules": {
+    "auth_register": {
+      "name_required": true,
+      "name_error": "Name is required.",
+      "email_required": true,
+      "email_error": "Email is required.",
+      "password_min_length": 6,
+      "password_error": "Password must be at least 6 characters.",
+      "duplicate_email_error": "Email is already registered.",
+      "source": "AuthController.java"
+    },
+    "auth_login": {
+      "invalid_credentials_error": "Invalid email or password.",
+      "source": "AuthService.java"
+    },
+    "cart_add": {
+      "quantity_capped_by_inventory": true,
+      "duplicate_product_size_merges": true,
+      "note": "Same productId+size combination increments quantity instead of creating duplicate line. See CartService.java:addToCart.",
+      "source": "CartService.java"
+    }
+  },
+  "ui_validation_rules": {
+    "product_detail_add_to_cart": {
+      "requires_login": true,
+      "redirect_if_not_logged_in": "/login",
+      "size_auto_selected_on_load": true,
+      "size_required_error": "Please select a size.",
+      "size_required_error_note": "WARNING: First size is auto-selected on page load (ProductDetail.jsx:23). Cannot trigger this error through normal UI flow.",
+      "cart_service_error_msg": "Failed to add item to cart. Please try again.",
+      "success_msg": "Added to cart!",
+      "success_msg_duration_ms": 2000,
+      "source": "ProductDetail.jsx"
+    },
+    "checkout_empty_cart": {
+      "redirects_to": "/cart",
+      "redirect_condition": "items.length === 0",
+      "source": "Checkout.jsx:58-61"
+    },
+    "cart_empty_state": {
+      "heading": "Your cart is empty",
+      "source": "Cart.jsx:17"
+    }
+  },
+  "scenario_data_map": {
+    "TC-F-001": {
+      "scenario_title": "Navigate to the product listing page via the Shop link",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173", "source": "synthesised"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["shop_link", "products_grid", "product_card"]
+    },
+    "TC-F-002": {
+      "scenario_title": "View product detail page from the product listing",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products", "source": "synthesised"},
+        "product_to_click_id": {"value": 36, "category": "products_without_size", "source": "data_store"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com", "Navigate to /products"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["product_card", "product_name", "product_description", "product_price", "add_to_cart_btn"]
+    },
+    "TC-F-003": {
+      "scenario_title": "Add a product to the cart with the default quantity of 1",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "product_name": {"value": "Adjustable Floral Ring", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/36", "source": "synthesised"},
+        "default_quantity": {"value": 1, "source": "synthesised"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com", "Navigate to /products/36", "Verify qty field shows 1"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["qty_value", "add_to_cart_btn", "success_msg", "cart_badge"]
+    },
+    "TC-F-004": {
+      "scenario_title": "Cart icon count increases with each item added",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_1_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "product_1_name": {"value": "Adjustable Floral Ring", "source": "data_store"},
+        "product_2_id": {"value": 38, "category": "products_without_size", "source": "data_store"},
+        "product_2_name": {"value": "Gold-Tone Choker Chain", "source": "data_store"},
+        "expected_count_after_2": {"value": 2, "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart via API: DELETE /api/cart (or use UI Clear Cart)",
+        "Verify cart badge is absent (count=0)"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["product_card", "add_to_cart_btn", "success_msg", "cart_badge"]
+    },
+    "TC-F-005a": {
+      "scenario_title": "Add a product with an incremented quantity using the '+' icon — Example 1 (clicks=1, expected_qty=2)",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/36", "source": "synthesised"},
+        "qty_plus_clicks": {"value": 1, "source": "feature_file"},
+        "expected_quantity": {"value": 2, "source": "feature_file"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com", "Navigate to /products/36"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["qty_increase_btn", "qty_value", "add_to_cart_btn", "cart_badge"]
+    },
+    "TC-F-005b": {
+      "scenario_title": "Add a product with an incremented quantity using the '+' icon — Example 2 (clicks=4, expected_qty=5)",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/36", "source": "synthesised"},
+        "qty_plus_clicks": {"value": 4, "source": "feature_file"},
+        "expected_quantity": {"value": 5, "source": "feature_file"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com", "Navigate to /products/36"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["qty_increase_btn", "qty_value", "add_to_cart_btn", "cart_badge"]
+    },
+    "TC-F-006": {
+      "scenario_title": "Add a sized product to the cart with an incremented quantity",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "HAPPY_PATH",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 4, "category": "products_with_size", "source": "data_store"},
+        "product_name": {"value": "Gold Solitaire Ring", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/4", "source": "synthesised"},
+        "size_to_select": {"value": "7", "category": "valid_size", "source": "data_store"},
+        "qty_plus_clicks": {"value": 2, "source": "feature_file"},
+        "expected_quantity": {"value": 3, "source": "feature_file"}
+      },
+      "state_setup_steps": ["Login as validuser@test.com", "Navigate to /products/4"],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["size_btn", "size_btn_active", "qty_increase_btn", "qty_value", "add_to_cart_btn", "cart_badge"]
+    },
+    "TC-F-007": {
+      "scenario_title": "Navigate to the cart page using the View Cart button",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/36", "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Navigate to /products/36",
+        "Click Add to Cart to add item",
+        "Verify success_msg 'Added to cart!' appears"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["add_to_cart_btn", "view_cart_link", "cart_page_header", "cart_item"]
+    },
+    "TC-F-008": {
+      "scenario_title": "All added items are displayed on the cart page",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_a_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "product_a_name": {"value": "Adjustable Floral Ring", "source": "data_store"},
+        "product_a_quantity": {"value": 1, "source": "feature_file"},
+        "product_b_id": {"value": 38, "category": "products_without_size", "source": "data_store"},
+        "product_b_name": {"value": "Gold-Tone Choker Chain", "source": "data_store"},
+        "product_b_quantity": {"value": 2, "source": "feature_file"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Navigate to /products/36 — add with qty=1",
+        "Navigate to /products/38 — click '+' once to set qty=2, then add to cart",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_page_header", "cart_item", "cart_item_name", "cart_item_qty_value", "cart_item_subtotal", "order_subtotal"]
+    },
+    "TC-F-009": {
+      "scenario_title": "Increase the quantity of an item already in the cart",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "initial_quantity": {"value": 1, "source": "feature_file"},
+        "expected_quantity_after": {"value": 2, "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Add product ID=36 with qty=1 via /products/36",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_item_qty_increase", "cart_item_qty_value", "order_subtotal"]
+    },
+    "TC-F-010": {
+      "scenario_title": "Decrease the quantity of an item already in the cart",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "initial_quantity": {"value": 2, "source": "feature_file"},
+        "expected_quantity_after": {"value": 1, "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Navigate to /products/36 — click '+' once to set qty=2 — click Add to Cart",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_item_qty_decrease", "cart_item_qty_value", "order_subtotal"]
+    },
+    "TC-F-011": {
+      "scenario_title": "Remove an item from the cart completely",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "initial_cart_count": {"value": 1, "source": "feature_file"},
+        "expected_cart_count_after": {"value": 0, "source": "feature_file"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Add product ID=36 with qty=1",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_item_remove_btn", "empty_cart_heading", "cart_badge"]
+    },
+    "TC-F-012": {
+      "scenario_title": "Redirect to login page when attempting to add to cart without being logged in",
+      "feature_tags": ["@regression", "@SCRUM-8", "@smoke"],
+      "classification": "AUTH_DEPENDENT",
+      "data_plan": {
+        "user_state": {"value": "not_logged_in", "source": "synthesised"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "starting_url": {"value": "http://localhost:5173/products/36", "source": "synthesised"},
+        "expected_redirect": {"value": "/login", "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Ensure user is NOT logged in (clear localStorage token / don't login)",
+        "Navigate to /products/36"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["add_to_cart_btn", "login_email_input", "login_password_input"]
+    },
+    "TC-F-013": {
+      "scenario_title": "Show an error when attempting to add a sized product without selecting a size",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "ERROR_NEGATIVE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 4, "category": "products_with_size", "source": "data_store"},
+        "size_selection": {"value": null, "category": "no_size_selected", "source": "synthesised"},
+        "expected_error": {"value": "Please select a size.", "source": "synthesised"}
+      },
+      "state_setup_steps": [],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "retired",
+      "retired_reason": "Implementation gap: ProductDetail.jsx auto-selects the first size on page load — the no-size-selected error state is unreachable via UI. Retired by human decision 2026-04-10.",
+      "locators_found": []
+    },
+    "TC-F-014": {
+      "scenario_title": "View an empty cart when no items have been added",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "EDGE_CASE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "cart_state": {"value": "empty", "source": "synthesised"},
+        "starting_url": {"value": "http://localhost:5173/cart", "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart (via Clear Cart button or API)",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["empty_cart_heading", "empty_cart_shop_now_link"]
+    },
+    "TC-F-015": {
+      "scenario_title": "Cart icon count persists after navigating away from the product detail page",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "EDGE_CASE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "category": "products_without_size", "source": "data_store"},
+        "items_in_cart": {"value": 1, "source": "feature_file"},
+        "navigate_to_home": {"value": "http://localhost:5173", "source": "synthesised"},
+        "navigate_back_to_shop": {"value": "http://localhost:5173/products", "source": "synthesised"},
+        "expected_badge_count": {"value": 1, "source": "feature_file"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Add product ID=36 — verify cart badge shows 1"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_badge", "shop_link", "logo_link"]
+    },
+    "TC-F-016": {
+      "scenario_title": "Adding the same product and size twice increments the quantity instead of duplicating",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "EDGE_CASE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 4, "category": "products_with_size", "source": "data_store"},
+        "product_name": {"value": "Gold Solitaire Ring", "source": "data_store"},
+        "size": {"value": "7", "source": "data_store"},
+        "first_add_quantity": {"value": 1, "source": "synthesised"},
+        "second_add_quantity": {"value": 1, "source": "synthesised"},
+        "expected_cart_lines": {"value": 1, "source": "feature_file"},
+        "expected_total_quantity": {"value": 2, "source": "feature_file"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Navigate to /products/4 — select size '7' — Add to Cart (qty=1)",
+        "Navigate back to /products/4"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["size_btn", "add_to_cart_btn", "cart_item", "cart_item_qty_value", "cart_badge"]
+    },
+    "TC-F-017": {
+      "scenario_title": "Cannot proceed to checkout with an empty cart",
+      "feature_tags": ["@regression", "@SCRUM-8"],
+      "classification": "EDGE_CASE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "cart_state": {"value": "empty", "source": "synthesised"},
+        "direct_url": {"value": "http://localhost:5173/checkout", "source": "synthesised"},
+        "expected_redirect": {"value": "/cart", "source": "synthesised"},
+        "note": "Checkout.jsx:58-61 — if items.length===0 calls navigate('/cart') synchronously on render. No error message shown — just redirect."
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Navigate directly to /checkout"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["empty_cart_heading", "cart_badge"]
+    },
+    "TC-F-018": {
+      "scenario_title": "Cart page fetches the latest cart data from the server when opened",
+      "feature_tags": ["@regression", "@SCRUM-8", "@pr-insight"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "source": "data_store"},
+        "setup_method": {"value": "Add item via REST API directly, then navigate to /cart in fresh page context", "source": "derived"},
+        "note": "CartContext.jsx useEffect loads cart from server on token change. To simulate 'previous session': add item via REST API call using user token, then navigate to /cart."
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart via API",
+        "Add item directly via POST to cart API with user JWT token (bypass UI)",
+        "Navigate to /cart"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_item", "cart_item_name"]
+    },
+    "TC-F-019": {
+      "scenario_title": "Cart items and session are preserved after a full page refresh",
+      "feature_tags": ["@regression", "@SCRUM-8", "@pr-insight"],
+      "classification": "STATE_DEPENDENT",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_1_id": {"value": 36, "source": "data_store"},
+        "product_2_id": {"value": 38, "source": "data_store"},
+        "expected_cart_count": {"value": 2, "source": "feature_file"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Clear cart",
+        "Add product ID=36 — verify badge shows 1",
+        "Add product ID=38 — verify badge shows 2",
+        "Trigger browser page refresh (F5 / driver.navigate().refresh())"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "locators_extracted",
+      "locators_found": ["cart_badge", "cart_item"]
+    },
+    "TC-F-020": {
+      "scenario_title": "Error message is shown when the cart service fails during add to cart",
+      "feature_tags": ["@regression", "@SCRUM-8", "@pr-insight"],
+      "classification": "ERROR_NEGATIVE",
+      "data_plan": {
+        "user_email": {"value": "validuser@test.com", "source": "data_store"},
+        "user_password": {"value": "Test@12345", "source": "data_store"},
+        "product_id": {"value": 36, "source": "data_store"},
+        "cart_service_state": {"value": "unavailable", "source": "needs_human"},
+        "expected_error": {"value": "Failed to add item to cart. Please try again.", "source": "synthesised"}
+      },
+      "state_setup_steps": [
+        "Login as validuser@test.com",
+        "Navigate to /products/36",
+        "REQUIRES: Cart service must be temporarily brought down or network request intercepted"
+      ],
+      "needs_human_data": false,
+      "human_data_ask": null,
+      "status": "manual",
+      "manual_reason": "Requires cart service to be temporarily unavailable — not automatable in current test environment. Marked @manual by human decision 2026-04-10. Script will be generated with a @manual/@skip tag.",
+      "locators_found": ["add_to_cart_btn"]
+    }
+  }
+}

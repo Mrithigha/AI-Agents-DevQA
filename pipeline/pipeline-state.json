@@ -41,6 +41,21 @@
       }
     ]
   },
+  "apiscriptgen": {
+    "status": "complete",
+    "stories_processed": ["SCRUM-8"],
+    "qa_repo_path": "C:\\Users\\karth\\OneDrive\\Desktop\\Tasks\\Tasks\\QAGemstoneWorld-UIAutomation",
+    "script_prs": [
+      {
+        "story": "SCRUM-8",
+        "pr_url": "https://github.com/Mrithigha/QAGemstoneWorld-UIAutomation/pull/4",
+        "branch": "feat/AI-ASG-SCRUM-8",
+        "automated_tc_count": 24,
+        "manual_tc_count": 0,
+        "total_tc_count": 24
+      }
+    ]
+  },
   "functionalscriptgen": {
     "status": "complete",
     "stories_processed": ["SCRUM-8"],

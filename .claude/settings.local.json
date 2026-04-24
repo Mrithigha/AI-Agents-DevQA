@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh auth:*)",
+      "Bash(sed:*)",
+      "Bash(python3:*)",
+      "Bash(pwd -W)",
+      "Bash(gh label:*)",
+      "Bash(gh pr:*)",
+      "Bash(python create_confluence_pages.py)",
+      "Bash(git mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(ls -la .env* load-env*)",
+      "Bash(java -version)",
+      "Bash(mvn -version)",
+      "Bash(cmd /c \"tree \\\\\"C:\\\\Users\\\\karth\\\\OneDrive\\\\Desktop\\\\Tasks\\\\Tasks\\\\QAGemstoneWorld-UIAutomation\\\\\" /F 2>&1\")"
+    ]
+  }
+}
